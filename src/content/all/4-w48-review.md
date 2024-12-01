@@ -36,7 +36,8 @@ pubDate: Dec 1 2024
 #### `@welcome-toast`를 환영해 🍞
 바닐라코딩 마지막 phase, 개인 프로젝트를 시작했다. 마치 대학교 졸업 처럼 영원히 다가오지 않을 것 같이 느껴졌던 프로젝트, 벌써 1주가 지났다. 그동안 나는 아이디어를 (다행히) 결정했고, 국내/해외 레퍼런스들의 UI와 source code를 보면서 낯선 개념도 새롭게 익히고 프로젝트를 구체화 하고 있다.
 <img src="/assets/img/w48-review-welcome-toast.png" width="700" alt="w48-review-welcome-toast">
-
+<img src="/public/assets/img/w48-review-welcome-toast.png" width="700" alt="w48-review-welcome-toast">
+<img src="../../../public/assets/img/w48-review-welcome-toast.png" width="700" alt="w48-review-welcome-toast">
 `@welcome-toast`가 내가 막 시작한 프로젝트의 이름이다. 웹페이지 방문자에게 서비스/기능 소개 UI 구현을 돕는 JavaScript SDK를 만들고 있다. 이 프로젝트가 해결하려는 핵심 문제는, **웹페이지의 첫 방문 사용자의 First Action을 유도**할 수 있게 돕는 것이다. npm package로 배포해서 개발자가 이용할 수 있는 모듈로 제공하고, Admin 페이지도 함께 구현해서 GUI로 쉽게 UI 설정을 제어할 수 있게 할 예정이다.
 
 지난 주 까지 팀 프로젝트로 만든 웹 서비스(bloblow), 바닐라코딩 선배 기수의 웹 서비스들을 보면서 처음 서비스를 방문하는 사용자에게 기능 소개, 튜토리얼 등이 더 친절하다면 좋겠다는 생각을 했다. 실제 상용화 된 서비스에도 도움이 되는, 실용적인 솔루션이 될 가능성이 있겠다는 판단도 들었다. 켄님도 아이디어를 좋게 봐주셨다. 기술적인 챌린지와 흥미로운 요소가 보였고, 현업에서 쓸 기술도 활용할 기회가 될 수 있다고 보셨다. 사실 아이디어 탄생 배경이 독특한데, 거슬러 올라가면 작년 헬스장에서 일일권을 등록해 운동하고 있을 때였다. 기대 보다 만족스럽게 운동을 끝냈는데, 문득 '소비자로서 온라인으로 이 헬스장의 강점, 사용법을 잘 전달 받지 못하고 있다'는 아쉬움을 갖게 되었다. 당시 잠깐의 생각이, 돌고 돌아 1년 후 내 프로젝트의 영감이 되었다.
