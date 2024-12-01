@@ -21,7 +21,7 @@ pubDate: Dec 1 2024
 
 #### 1일 1기록 (자체 평가: 9.5/10)
 
-<img src="/src/image/w48-review-morning-paper.png" width="700" alt="w48-review-morning-paper">
+<img src="/assets/img/w48-review-morning-paper.png" width="700" alt="w48-review-morning-paper">
 
 6월 부터 모닝페이퍼를 기록하기 시작했는데, 벌써 반년이 지났다. 쏜살같이 지나간 시간들... 살면서 이렇게 오래 기록 습관을 유지해본 건이 처음인듯. 원래 기록, 수집을 좋아하긴 했다. 내 강점 분석 리포트를 보면 '수집'이 2위를 차지할 정도니까.)
 
@@ -35,7 +35,7 @@ pubDate: Dec 1 2024
 
 #### `@welcome-toast`를 환영해 🍞
 바닐라코딩 마지막 phase, 개인 프로젝트를 시작했다. 마치 대학교 졸업 처럼 영원히 다가오지 않을 것 같이 느껴졌던 프로젝트, 벌써 1주가 지났다. 그동안 나는 아이디어를 (다행히) 결정했고, 국내/해외 레퍼런스들의 UI와 source code를 보면서 낯선 개념도 새롭게 익히고 프로젝트를 구체화 하고 있다.
-<img src="/src/image/w48-review-welcome-toast.png" width="400" alt="w48-review-welcome-toast">
+<img src="/assets/img/w48-review-welcome-toast.png" width="700" alt="w48-review-welcome-toast">
 
 `@welcome-toast`가 내가 막 시작한 프로젝트의 이름이다. 웹페이지 방문자에게 서비스/기능 소개 UI 구현을 돕는 JavaScript SDK를 만들고 있다. 이 프로젝트가 해결하려는 핵심 문제는, **웹페이지의 첫 방문 사용자의 First Action을 유도**할 수 있게 돕는 것이다. npm package로 배포해서 개발자가 이용할 수 있는 모듈로 제공하고, Admin 페이지도 함께 구현해서 GUI로 쉽게 UI 설정을 제어할 수 있게 할 예정이다.
 
