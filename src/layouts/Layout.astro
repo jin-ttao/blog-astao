@@ -16,18 +16,20 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" , initial-scale="1" />
 
     <title>astao</title>
-    <meta name="description" content="Blog as Tao." />
+    <meta name="description" content="Tao Blog" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico" />
 
-    <meta property="og:title" content={title} />
-    <meta property="og:site_name" content="astao" />
+    <meta property="og:title" content="astao" />
+    <meta property="og:site_name" content="tao tech blog" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
     <!-- <meta property="og:image" content="/assets/img/" /> -->
-    <meta property="og:image:alt" content="Blog as Tao." />
+    <meta property="og:image:alt" content="Tao Blog" />
     <meta property="og:locale" content="en" />
-    <meta property="og:description" content="Blog as Tao." />
+    <meta property="og:description" content="Tao Blog" />
+
+    <meta name="google-site-verification" content={import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION} />
   </head>
   <body>
     <Header />
