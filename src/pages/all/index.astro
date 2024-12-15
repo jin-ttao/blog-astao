@@ -20,6 +20,7 @@ const posts = (await getCollection("all")).sort(
           <span class="date">
             <FormattedDate date={post.data.pubDate} />
           </span>
+          <span class="post-description">{post.data.description}</span>
         </div>
       ))
     }
@@ -71,6 +72,13 @@ const posts = (await getCollection("all")).sort(
         align-items: center;
         justify-content: flex-end;
       }
+
+      .post-description {
+        font-size: 0.8rem;
+        color: #666;
+        margin: 5px;
+      }
+
     </style>
   </main>
 </Layout>
