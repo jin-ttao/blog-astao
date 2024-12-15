@@ -6,6 +6,8 @@ const all = defineCollection({
     title: z.string(),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
+    description: z.string(),
+    tags: z.array(z.string()).optional(),
   }),
 });
 
