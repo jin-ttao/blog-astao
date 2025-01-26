@@ -1,12 +1,15 @@
 ---
-title: "2024W49 회고: 바닐라코딩 프론트엔드 개인 프로젝트 2주차"
+title: "2024w49 회고"
 pubDate: Dec 8 2024
-description: "질문으로 성장하는 주니어 (어떻게 하는건데), 똑같은 1분도 제대로"
+description: "바닐라코딩 프론트엔드 개인 프로젝트 2주차 / 질문으로 성장하는 주니어 (어떻게 하는건데)"
 tags: ["바닐라코딩", "프론트엔드", "프론트엔드부트캠프"]
 ---
 
-# W49 회고
-2024.12.01 ~ 12.07
+# w49 회고
+## 바닐라코딩 프론트엔드 개인 프로젝트 2주차 <br> 질문으로 성장하는 주니어 (어떻게 하는건데)
+<div style="color: gray; font-size: 0.9em;">2024.12.01 ~ 12.07</div>
+
+---
 
 <img src="/assets/img/w49-vaco.png" width="300" alt="w49-vaco">
 <div style="color: gray; font-style: italic; font-size: 0.9em;">(바코 로고 뜻 아는 사람?)</div>
