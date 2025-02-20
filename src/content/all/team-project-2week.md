@@ -24,7 +24,7 @@ tags: [""]
 
 ### 처음에는 모든 것을 완벽하게 보려고 했다
 
-<img alt="code-review" src="https://i.imgur.com/NRhLzQY.png">
+<img alt="code-review" src="https://i.imgur.com/7QvoxHL.png">
 <div style="color: gray; font-size: 0.9em;">팀 컨벤션 정의 전 초기 코드 리뷰. 나중에는 이런 간단한 리뷰를 방지할 수 있는 방법을 고민했다 (해당 리뷰 아래 5개의 리뷰가 더 있다)</div>
 
 <br>
