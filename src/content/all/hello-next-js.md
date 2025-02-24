@@ -20,7 +20,7 @@ tags: [""]
 
 <br>
 
-## Next.js는 어디로 가자는 걸까?
+## Next.js는 어디로 가자는 걸까? 🪑 🏃‍♂️‍➡️
 
 <img src="https://i.imgur.com/zeUqOYY.png" alt="nextjs-intro" />
 
