@@ -1,7 +1,7 @@
 ---
-title: "2024w48 회고"
+title: "기록 루틴 점검, 개인 프로젝트 1주차 돌아보자"
 pubDate: Dec 1 2024
-description: "바닐라코딩 프론트엔드 111일차 / 기록 루틴 점검 / 개인 프로젝트 1주차 복기"
+description: "2024w48 회고 / 바닐라코딩 프론트엔드 111일차"
 image: "/assets/img/w48-review-morning-paper.png"
 tags: ["루틴", "바닐라코딩", "프론트엔드", "프론트엔드부트캠프"]
 ---
