@@ -1,13 +1,12 @@
 ---
-title: "개발 과정에서의 고민, 의사결정 #1"
+title: "@welcome-toast가 CDN 제공에 명시적 버전 관리 방식을 택한 이유"
 pubDate: Feb 4 2025
-description: "@welcome-toast가 CDN 제공에 명시적 버전 관리 방식을 택한 이유"
+description: "개발 과정에서의 고민, 의사결정 #1"
 tags: [""]
 ---
 
-# 개발 고민, 의사결정 #1
-
-## welcome-toast가 CDN 제공에 명시적 버전 관리 방식을 택한 이유
+# welcome-toast가 CDN 제공에 명시적 버전 관리 방식을 택한 이유
+개발 고민, 의사결정 #1
 
 <div style="color: gray; font-size: 0.9em;">2025.02.04</div>
 
@@ -23,7 +22,7 @@ tags: [""]
 
 ### jsDelivr 만으론 부족해
 
-개인 프로젝트로 진행 중인 @[welcome-toast SDK](https://github.com/welcome-toast/welcome-toast)는 웹사이트 온보딩을 위한 토스트 메시지를, 어드민 페이지 편집 만으로 바로 적용할 수 있는 JavaScript SDK 입니다.
+> 개인 프로젝트로 진행 중인 @[welcome-toast SDK](https://github.com/welcome-toast/welcome-toast)는 웹사이트 온보딩을 위한 토스트 메시지를, 어드민 페이지 편집 만으로 바로 적용할 수 있는 JavaScript SDK 입니다.
 
 ```js
 // 연동이 쉬운 Amplitude script 예시
