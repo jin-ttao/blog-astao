@@ -26,6 +26,8 @@ Next.js는 "다음" + "js"를 결합한 이름이다. "다음 자바스크립트
 
 2016년 Vercel이 Next.js(당시 이름은 ZEIT였다고 함)를 개발할 당시, React로 SSR을 구현하는 것은 상당히 복잡했다. 예를 들어 React로 SSR을 직접 구현하려면 여러 설정이 필요했다.
 
+몇 가지 방법이 있었지만, React로 서버 사이드 렌더링(SSR)을 구현하는 방법 중 하나가 [react-dom/server API](https://ko.react.dev/reference/react-dom/server) 모듈을 사용하는 것이었다. 이 모듈은 React 컴포넌트를 서버에서 HTML 문자열로 렌더링할 수 있는 기능을 제공한다. 예를 들어, `ReactDOMServer.renderToString()` 메서드를 사용해서 컴포넌트를 HTML 문자열로 변환할 수 있게 되는 것. 이렇게 생성된 HTML이 클라이언트에 전송되어 초기 페이지 로드 시 사용자가 볼 수 있도록 하는 흐름이다.
+
 ```js
 import express from "express"; // 👈 클라이언트 코드에 express?!
 import React from "react";
@@ -49,8 +51,6 @@ app.get("*", (req, res) => {
   `);
 });
 ```
-
-몇 가지 방법이 있었지만, React로 서버 사이드 렌더링(SSR)을 구현하는 방법 중 하나가 [react-dom/server API](https://ko.react.dev/reference/react-dom/server) 모듈을 사용하는 것이었다. 이 모듈은 React 컴포넌트를 서버에서 HTML 문자열로 렌더링할 수 있는 기능을 제공한다. 예를 들어, `ReactDOMServer.renderToString()` 메서드를 사용해서 컴포넌트를 HTML 문자열로 변환할 수 있게 되는 것. 이렇게 생성된 HTML이 클라이언트에 전송되어 초기 페이지 로드 시 사용자가 볼 수 있도록 하는 흐름이다.
 
 이때 Express를 함께 사용했다는 걸 볼 수 있다. 처음 이 예시를 보고, 클라이언트 코드에서 서버 구현할 때 사용하는 Express를 사용한다는 점이 어색하다고 느꼈다. 일반적으로는 서버 코드와 클라이언트 코드를 분리해서 관리하는데, 같은 디렉토리 안에서 함께 존재하는 경우도 당연히 가능하긴 했다. Express는 서버 사이드에서 HTTP 요청을 다룰 때 사용되는, Node.js 웹 프레임워크이다. Express는 Node.js 환경에 중심을 둔 프레임워크이고, React는 브라우저 환경에서 실행되는 것이 일반적이라 이 둘의 만남이 어색하다고 느꼈나보다. 어쨋든 서로 다른 환경에서 작동하지만, 이 둘을 함께 사용해서 Express로 서버 측에서 React 컴포넌트를 렌더링하고 클라이언트에 HTML을 전송하는 역할을 함으로써 서버 사이드 렌더링(SSR)을 구현해왔다고 한다.
 
@@ -133,6 +133,3 @@ function ClientComponent() {
 SSR, SSG, CSR의 장단점을 유연하게 선택할 수 있는 Next.js도 분명 매력적이다. 하지만 내 블로그의 현재 요구사항으로는, Astro로 충분했다. 지금 내가 필요한 건, 정적 콘텐츠를 로드하는 것만이 중요했다. 특히 마크다운 기반의 글이 대부분이라, 사용자 인터랙션이 필요한 동적 기능은 계획에 없었다. 또 Astro도 빠른 초기 로딩 측면에 이점이 있다. "Zero JavaScript by default"라는 멋진 메시지를 풍기며, 정적 콘텐츠에 최적화되어 있음을 보여준다. 사실 마음에 드는 템플릿도 찾았다. 블로그는 어떻게 만들든, 일단 시작하는게 중요한 것 같다. 블로그 시작에 필요한 기능들이 이미 잘 갖춰져 있는 템플릿을 활용해서 꾸준히 기록해보려고 한다.
 
 #블로그 #astro #nextjs #react #javascript
-
-참고
-[React Server Component 이모저모 알아보기](https://pyjun01.github.io/v/rsc/)
