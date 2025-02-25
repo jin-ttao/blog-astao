@@ -80,9 +80,8 @@ const FormComponent = useMemo(
 );
 
 import { useCallback, useState, useEffect, memo, useMemo } from "react";
-import { Shipping } from "./Shipping.js";
 
-export default function ParentComponent() {
+function ParentComponent() {
   const [text, setText] = useState(0);
   const callbackFn = useCallback(() => console.log("callbackFn again!"), []);
 
@@ -117,30 +116,20 @@ useCallback으로 React.memo를 대체할 수 있지만, 메모가 무색해졌�
 ```jsx
 import { useCallback, useState, useEffect, memo, useMemo } from "react";
 
-export default function ProductPage() {
+// 👉 함수 자체를 변수 FormComponent 자체에 담음
+const FormComponent = useCallback(
+  () => <Form callbackFn={callbackFn} />,
+  [callbackFn]
+);
+
+function ParentComponent() {
   const [text, setText] = useState(0);
-  const callbackFn = useCallback(() => console.log("foo"), []);
-
-	// 👉 함수 자체를 변수 ShippingForm 자체에 담음
-  const FormComponent = useCallback(
-    () => <Form callbackFn={callbackFn} />,
-    [fooCallback]
-  );
-	
-	// 👉
-  const ShippingFormFinal = useCallback(
-    () => ShippingForm()
-  , [callbackFn]);
-
+  const callbackFn = useCallback(() => console.log("callbackFn again!"), []);
   // ...
-
-  useEffect(() => {
-    console.log("callbackFn again!");
-  }, [callbackFn]);
 
   return (
     <div className={theme}>
-      {ShippingFormFinal()} // 👉 함수 호출 까지 해줌 > 동작은 되나, 메모는 안됨.
+      <FormComponent /> // 👉 함수 호출 까지 해줌 > 동작은 되나, 메모는 안됨.
       <div>{text}</div>
       <input type="text" onChange={handleSubmit} />
     </div>
@@ -148,7 +137,7 @@ export default function ProductPage() {
 }
 ```
 
-원인은 JSX에서 컴포넌트를 호출하는 방식에 있었다. useMemo와 달리, useCallback으로 캐싱한 함수를 그대로 렌더링할 수 없었고, 그 반환값을 렌더링해야 했다. JSX 코드에서 `{Form()}`와 같이 함수를 직접 호출하면, useCallback으로 함수를 메모이제이션 했더라도 매 렌더링마다 새로운 컴포넌트 인스턴스가 생성된다. 즉, 함수 자체는 메모이제이션되어 동일한 참조를 유지하지만, JSX에서 이 함수를 호출할 때마다 새로운 React 엘리먼트가 생성되는 것이다. 매 렌더링마다 새로운 컴포넌트를 생성하는 셈이기 때문에, 결과적으로 memo의 최적화 효과가 사라지게 된다.
+`⁠useCallback`이 함수의 참조를 메모이제이션하는 데 사용되기 때문이다. useMemo는 컴포넌트의 결과를 메모이제이션 하고, useCallback은 컴포넌트 자체를 메모한다. 이렇게 컴포넌트를 렌더링(함수 호출)하면, 메모이제이션 했더라도 매 렌더링마다 새로운 컴포넌트 인스턴스가 생성된다. 즉, 함수 자체는 메모이제이션되어 동일한 참조를 유지하지만, JSX에서 이 함수를 호출할 때마다 새로운 React 엘리먼트가 생성되는 것이다. 매 렌더링마다 새로운 컴포넌트를 생성하는 셈이기 때문에, 결과적으로 memo의 최적화 효과가 사라지게 된다.
 
 <br>
 
