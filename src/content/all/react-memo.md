@@ -14,12 +14,14 @@ tags: [""]
 
 ## 결론은 `useMemo`로 대체 가능했다
 
-React `useMemo`와 `useCallback`을 공부하면서 문득 궁금했다. 둘 다 '값'을 메모이제이션하는 건데, 함수도 결국 '값'이니 `useCallback` 대신 `useMemo`를 사용해도 되지 않을까? 오히려 `useMemo`를 사용하는 것이 일관성이 있지 않을까? 물론 맥락상 함수의 캐싱에 `useCallback`를 사용하는 것이 적합하고, 공식 문서에서도 기능상 대체할 수 있다고 하지만, [훅의 역할을 고려하여 `useCallback` 사용을 권장한다.](https://react.dev/reference/react/useMemo#memoizing-a-function) 그래서 이번 실험에서는, 동일한 동작 > 대체 가능한 것인지 검증해보려고 했다.
+React `useMemo`와 `useCallback`을 공부하면서 문득 궁금했다. 둘 다 '값'을 메모이제이션하는 건데, 함수도 결국 '값'이니 `useCallback` 대신 `useMemo`를 사용해도 되지 않을까? 오히려 `useMemo`를 사용하는 것이 일관성이 있지 않을까? 물론 맥락상 함수의 캐싱에 `useCallback`를 사용하는 것이 적합하고, 공식 문서에서도 기능상 대체할 수 있다고 하지만, [훅의 역할을 고려하여 `useCallback` 사용을 권장한다.](https://react.dev/reference/react/useMemo#memoizing-a-function) 그래서 이번 실험에서는, **동일한 동작 > 대체 가능한 것인지** 검증해보려고 했다. 이 과정에서 리액트 캐싱을 어떻게 바라보면 좋을지 생각해보게 되었다. **캐싱이 필요한 시점과 그렇지 않은 시점을 구분하고, 상황에 맞는 적절한 도구를 선택**하는 것이 중요하다는 것을 배웠다.
 
 <img src="https://i.imgur.com/XZS4lXj.png" alt="useMemo-useCallback" style="display: block; margin: 0 auto;">
 <div style="color: gray; font-size: 0.9em;">`useMemo` 대신 `useCallback`!</div>
 
-추가로, 컴포넌트를 메모하는 [`React Memo`](https://react.dev/reference/react/memo)도 `useCallback`로 대체할 수 있는지 실험해보았다. 컴포넌트도 함수니까, `useCallback`로도 prop에 따라 컴포넌트 리렌더링을 건너 뛸 수 있을까? 이것의 결론은 `useCallback`으로 동작하나, 메모이제이션이 무색하게 리렌더링은 여전히 발생했다. 이 실험 과정을 정리해보았다.
+- 이후 확인할 부분 : `useCallback` 훅 소스 코드
+
+추가로, 컴포넌트를 메모하는 [`React Memo`](https://react.dev/reference/react/memo)도 `useCallback`로 대체할 수 있는지 실험해보았다. 컴포넌트도 함수니까, `useCallback`로도 prop에 따라 컴포넌트 리렌더링을 건너 뛸 수 있을까? **이것의 결론은 `useCallback`으로 동작하나, 메모이제이션이 무색하게 리렌더링은 여전히 발생했다.** 이 실험 과정을 정리해보았다.
 
 <br>
 
@@ -31,7 +33,7 @@ React `useMemo`와 `useCallback`을 공부하면서 문득 궁금했다. 둘 다
 
 위 구조를 활용하기로 하고, 폼 형태의 제어 컴포넌트를 만들어 해당 컴포넌트 리렌더링을 발생시키기 위해 텍스트 입력 상태를 추가했다. 이렇게 하면 텍스트가 변경될 때마다 컴포넌트가 리렌더링되면서, 설정한 로그를 통해 메모이제이션이 제대로 동작하는지 확인할 수 있었다. 그래서 **부모 컴포넌트의 `useCallback`으로 감싸준 함수가 실제로 재생성 되지 않는지, 그리고 그로 인해 자식 컴포넌트 리렌더링도 막을 수 있는지** 검증하는 것이었다.
 
-- [GitHub - Imply empty array of dependencies #24123: 의존성이 빈 배열이라면 useCallback은 변수에 최초 마운트시의 최초 함수를 1번만 할당함](https://github.com/facebook/react/issues/24123#issuecomment-1075117581)
+- [GitHub - 의존성이 빈 배열이라면 useCallback은 최초 마운트시 함수 1번만 할당](https://github.com/facebook/react/issues/24123#issuecomment-1075117581)
 
 ### 첫 검증: `useCallback`과 `useMemo`는 동일한 동작을 한다
 
@@ -54,7 +56,7 @@ export default function ParentComponent({ productId, referrer, theme }) {
 
   return (
     <div className={theme}>
-      <ShippingForm callbackFn={callbackFn} />
+      <ChildComponent callbackFn={callbackFn} />
       <div>{text}</div>
       <input type="text" onChange={handleSubmit} />
     </div>
@@ -66,27 +68,31 @@ export default function ParentComponent({ productId, referrer, theme }) {
 
 ## 다음 검증 : `React.memo`는 `useMemo`로 대체 가능하다 🙋
 
-실험 결과 React.memo는 useMemo로 대체할 수 있었다. 차이점은 코드 레벨상 적용 위치일뿐. React.memo는 자식 컴포넌트 파일에서 직접 컴포넌트를 감싸는 반면, useMemo는 부모 컴포넌트에서 렌더링 결과물을 감싸게 된다. 흥미로운 건, useMemo가 단순히 값이 아닌 컴포넌트의 렌더링 결과 자체를 메모이제이션한다는 것이다. 의존성 배열의 fooCallback이 변경되지 않는 한, FormComponent는 이전 렌더링의 결과를 그대로 재사용한다.
+실험 결과 React.memo는 useMemo로 대체할 수 있었다. 차이점은 코드 레벨상 적용 위치일뿐. React.memo는 자식 컴포넌트 파일에서 직접 컴포넌트를 감싸는 반면, useMemo는 부모 컴포넌트에서 렌더링 결과물을 감싸게 된다. 흥미로운 건, useMemo가 단순히 값이 아닌 컴포넌트의 렌더링 결과 자체를 메모이제이션한다는 것이다. 의존성 배열의 callbackFn 변경되지 않는 한, FormComponent는 이전 렌더링의 결과를 그대로 재사용한다.
 
 ```jsx
 const FormComponent = useMemo(
-  () => <ChildComponent callbackFn={callbackFn} />,
+  () => <Form callbackFn={callbackFn} />,
   [callbackFn]
 );
 ```
 
-## 두번째 검증: useCallback으로는 React.memo를 대체할 수 있지만... 🙅
+## 마지막 검증: useCallback으로는 React.memo를 대체할 수 있지만... 🙅
 
 useCallback으로 React.memo를 대체할 수 있지만, 메모가 무색해졌다. 즉 동일한 최적화를 시도했을 때 코드는 동작하지만 리렌더링을 막지는 못했다.
 
 ```jsx
 const FormComponent = useCallback(
-  () => <ChildComponent callbackFn={callbackFn} />,
+  () => <Form callbackFn={callbackFn} />,
   [callbackFn]
 );
+
+// 호출부
+FormComponent();
 ```
-원인은 JSX에서 컴포넌트를 호출하는 방식에 있었다. JSX 코드에서 `{FormComponent()}`와 같이 함수를 직접 호출하면, useCallback으로 함수를 메모이제이션 했더라도 매 렌더링마다 새로운 컴포넌트 인스턴스가 생성된다. 즉, 함수 자체는 메모이제이션되어 동일한 참조를 유지하지만, JSX에서 이 함수를 호출할 때마다 새로운 React 엘리먼트가 생성되는 것이다. 매 렌더링마다 새로운 컴포넌트를 생성하는 셈이기 때문에, 결과적으로 memo의 최적화 효과가 사라지게 된다.
+
+원인은 JSX에서 컴포넌트를 호출하는 방식에 있었다. JSX 코드에서 `{Form()}`와 같이 함수를 직접 호출하면, useCallback으로 함수를 메모이제이션 했더라도 매 렌더링마다 새로운 컴포넌트 인스턴스가 생성된다. 즉, 함수 자체는 메모이제이션되어 동일한 참조를 유지하지만, JSX에서 이 함수를 호출할 때마다 새로운 React 엘리먼트가 생성되는 것이다. 매 렌더링마다 새로운 컴포넌트를 생성하는 셈이기 때문에, 결과적으로 memo의 최적화 효과가 사라지게 된다.
 
 ## 결론
 
-단순한 의심에서 시작하긴 했지만, React의 메모이제이션을 언제 취하는게 좋을지에 대한 고민으로 이어졌다. 현재로써는 성급한 성능 최적화가 되지 않도록, 성능에 문제가 생겼을 때 활용해보면 좋겠다는 1차 결론을 냈다. useMemo, useCallback로 값 혹은 함수를 메모이제이션하더라도, 그 '메모'를 어떻게 사용하느냐에 따라 최적화의 효과와 유용함이 달라질 것이다. 최근 구현해본 어플리케이션은 대부분 단순한 서비스들이라, 메모이제이션에도 비용과 이득을 비교해보기 어려운 면이 있었다. 언젠가 비교해볼 기회가 생긴다면, 또 한 번 기록을 남겨보자.
+단순한 의심에서 시작하긴 했지만, React의 메모이제이션을 언제 취하는게 좋을지에 대한 고민으로 이어졌다. 현재로써는 성급한 성능 최적화가 되지 않도록, 성능에 문제가 생겼을 때 활용해보면 좋겠다는 1차 결론을 냈다. 특히 메모이제이션은 메모리 사용과 초기 계산 비용이라는 트레이드오프가 있으니, 실제 성능 측정을 통해 필요한 곳에 적용하는 것이 바람직할 것이다. 최근 구현해본 어플리케이션은 대부분 단순한 서비스들이라, 메모이제이션에도 비용과 이득을 비교해보기 어려운 면이 있었다. 언젠가 비교해볼 기회가 생긴다면, 또 한 번 기록을 남겨보자.
