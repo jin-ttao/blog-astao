@@ -19,7 +19,7 @@
   --accent: #8926ed;
   --accent-faint: #8926ed55;
 
-  /* 라이트 모드 (기본) */
+  /* 라이트 모드(기본) */
   --bg-primary: #fafafa;
   --bg-secondary: #ffffff;
   --text-primary: #333333;
@@ -30,7 +30,7 @@
   --selection-color: purple;
   --code-bg: var(--bg-secondary);
 
-  /* 시스템 폰트를 기본으로 사용 */
+  /* 시스템 폰트 기본 사용 */
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter var", "Inter", sans-serif;
   --font-mono: "Jetbrains Mono", ui-monospace, "SF Mono", Menlo, Monaco, monospace;
 }

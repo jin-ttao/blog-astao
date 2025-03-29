@@ -10,7 +10,6 @@ const tagCounts = tags.reduce((acc, tag) => {
   return acc;
 }, {} as Record<string, number>);
 
-// 게시물 정렬
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
@@ -29,7 +28,7 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
     </div>
     <div class="posts-list">
       {sortedPosts.map(post => (
-        <a href={`/all/${post.slug}/`} class="post-item" data-tags={post.data.tags?.join(',')}>
+        <a href={`/all/${post.slug}/`} class="post-item" data-tags={post.data.tags?.join(',') || ''}>
           <h2 class="post-title">{post.data.title}</h2>
           <div class="post-tags">
             {post.data.tags?.map(tag => (
@@ -45,7 +44,7 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
 <script>
   function initializeTagFilter() {
     const tagButtons = document.querySelectorAll('.tag-badge');
-    const posts = document.querySelectorAll('.post-item');
+    const posts = document.querySelectorAll<HTMLElement>('.post-item');
     
     tagButtons.forEach(button => {
       button.addEventListener('click', () => {
@@ -53,14 +52,11 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
         button.classList.add('active');
         
         const selectedTag = button.getAttribute('data-tag');
+        if (!selectedTag) return;
         
         posts.forEach(post => {
-          if (selectedTag === 'all') {
-            post.style.display = 'block';
-          } else {
-            const postTags = post.getAttribute('data-tags')?.split(',') || [];
-            post.style.display = postTags.includes(selectedTag) ? 'block' : 'none';
-          }
+          const postTags = post.dataset.tags?.split(',') || [];
+          post.style.display = selectedTag === 'all' || postTags.includes(selectedTag) ? 'block' : 'none';
         });
       });
     });
