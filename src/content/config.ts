@@ -8,6 +8,7 @@ const all = defineCollection({
     updatedDate: z.coerce.date().optional(),
     description: z.string(),
     tags: z.array(z.string()).optional(),
+    heroImage: z.string().optional(),
   }),
 });
 

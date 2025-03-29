@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import FormattedDate from "../../components/FormattedDate.astro";
 import Layout from "../../layouts/Layout.astro";
+import { Image } from 'astro:assets';
 
 const posts = (await getCollection("all")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -10,75 +11,115 @@ const posts = (await getCollection("all")).sort(
 
 <Layout title="all - Jintae">
   <main>
-    <h1>all</h1>
+    <h1>All Posts</h1>
     {
       posts.map((post) => (
-        <div class="post-item">
-          <a href={`/all/${post.slug}/`}>
+        <a href={`/all/${post.slug}/`} class="post-item">
+          <div class="post-content">
             <h2 class="title">{post.data.title}</h2>
-          </a>
-          <span class="date">
-            <FormattedDate date={post.data.pubDate} />
-          </span>
-          <span class="post-description">{post.data.description}</span>
-        </div>
+            <p class="post-description">{post.data.description}</p>
+            <div class="post-meta">
+              <FormattedDate date={post.data.pubDate} />
+              <span class="read-time">{post.data.readTime || '3 min read'}</span>
+            </div>
+          </div>
+          {post.data.heroImage && (
+            <div class="post-thumbnail">
+              <Image
+                src={post.data.heroImage}
+                alt={post.data.title}
+                width={120}
+                height={120}
+                format="webp"
+                fit="cover"
+              />
+            </div>
+          )}
+        </a>
       ))
     }
 
     <style>
       .post-item {
-        margin-bottom: 1rem;
-        border-bottom: 1px solid #ccc;
         display: grid;
-        grid-template-columns: 5fr 1fr;
-        margin: 20px 0 0 0;
+        grid-template-columns: 1fr 120px;
+        gap: 1.5rem;
+        padding: 24px 0;
+        border-bottom: 1px solid var(--border-color);
+        text-decoration: none;
+        color: inherit;
+        align-items: flex-start;
+      }
+
+      .post-thumbnail {
+        width: 120px;
+        height: 120px;
+        overflow: hidden;
+        border-radius: 8px;
+        margin: 0;
         padding: 0;
       }
 
-      .post-item > a {
-        text-decoration: none;
+      .post-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
       }
 
-      .post-item > a > h2 {
-        margin: 0;
-        font-size: 1rem;
-        font-weight: 500;
-        color: var(--black-light);
+      @media (max-width: 768px) {
+        .post-item {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        .post-thumbnail {
+          width: 100%;
+          height: 200px;
+          order: -1;
+        }
+
+        .post-content {
+          padding-top: 1rem;
+        }
+
+        .title {
+          font-size: 1.1rem;
+        }
+      }
+
+      .post-content {
         display: flex;
-        justify-content: flex-start;
-        align-items: center;
-      }
-
-      .post-item > a > h2:hover {
-        color: var(--accent);
-      }
-
-      .post-item:last-child {
-        border-bottom: none;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0;
+        margin: 0;
       }
 
       .title {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-      }
-
-      .date {
-        font-size: 0.8rem;
-        color: #666;
         margin: 0;
-        text-align: right;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
+        padding: 0;
+        font-size: 1.2rem;
+        color: var(--text-primary);
+        line-height: 1.4;
       }
 
       .post-description {
-        font-size: 0.8rem;
-        color: #666;
-        margin: 5px;
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
       }
 
+      .post-meta {
+        display: flex;
+        gap: 1rem;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+
+      .post-item:hover .title {
+        color: var(--accent);
+      }
     </style>
   </main>
 </Layout>

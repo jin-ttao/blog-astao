@@ -1,11 +1,11 @@
 ---
-title: "@welcome-toast가 CDN 제공에 명시적 버전 관리 방식을 택한 이유"
+title: "SDK에 시멘틱 버전 관리를 택한 이유"
 pubDate: Feb 4 2025
-description: "개발 과정에서의 고민, 의사결정 #1"
-tags: [""]
+description: "Welcome-toast 프로젝트 시리즈"
+tags: ["SDK", "프론트엔드", "기술아키텍처", "버전관리"]
 ---
 
-# welcome-toast가 CDN 제공에 명시적 버전 관리 방식을 택한 이유
+# Welcome-toast SDK가 시멘틱 버전 관리를 택한 이유
 개발 고민, 의사결정 #1
 
 <div style="color: gray; font-size: 0.9em;">2025.02.04</div>
