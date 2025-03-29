@@ -6,9 +6,8 @@ export default defineConfig({
   site: "https://as-tao.com",
   markdown: {
     shikiConfig: {
-      themes: {
-        light: "snazzy-light",
-      },
+      theme: "github-dark",
+      wrap: true
     },
   },
 });

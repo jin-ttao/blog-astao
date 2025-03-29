@@ -1,42 +1,60 @@
 @font-face {
-  font-family: Inter var;
+  font-family: "Inter var";
+  font-weight: 100 900;
   font-display: swap;
+  font-style: normal;
   src: url("/assets/font/intervar.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: Jetbrains Mono;
+  font-family: "Jetbrains Mono";
+  font-weight: 400;
   font-display: swap;
+  font-style: normal;
   src: url("/assets/font/jetbrainsmono-regular.woff2") format("woff2");
 }
 
 :root {
+  /* 공통 색상 */
   --accent: #8926ed;
   --accent-faint: #8926ed55;
 
-  --white: #ffffff;
-  --white-light: #fafafa;
-  --white-mid: #ededed;
-  --white-dark: #cccccc;
+  /* 라이트 모드 (기본) */
+  --bg-primary: #fafafa;
+  --bg-secondary: #ffffff;
+  --text-primary: #333333;
+  --text-secondary: #555555;
+  --border-color: #cccccc;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --selection-bg: #8926ed50;
+  --selection-color: purple;
+  --code-bg: var(--bg-secondary);
 
-  --black: #000000;
-  --black-light: #333333;
-  --black-mid: #222222;
-  --black-dark: #111111;
+  /* 시스템 폰트를 기본으로 사용 */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter var", "Inter", sans-serif;
+  --font-mono: "Jetbrains Mono", ui-monospace, "SF Mono", Menlo, Monaco, monospace;
+}
 
-  --grey-light: #999999;
-  --grey-mid: #777777;
-  --grey-dark: #555555;
+[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2a2a2a;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --border-color: #404040;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --selection-bg: #8926ed30;
+  --selection-color: #e0a9ff;
+  --code-bg: #2d2d2d;
 }
 
 *::selection {
-  background-color: #8926ed50;
-  color: purple;
+  background-color: var(--selection-bg);
+  color: var(--selection-color);
 }
 
 body {
-  background-color: var(--white-light);
-  color: var(--black-light);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 
   padding: 2rem;
   max-width: 45rem;
@@ -51,8 +69,7 @@ body {
   font-variation-settings: normal;
   text-rendering: optimizeLegibility;
   font-feature-settings: "calt", "liga";
-  font-family: "Inter var", "Inter", "Helvetica", "Arial", "Liberation Sans",
-    "Noto sans", sans-serif;
+  font-family: var(--font-sans);
 
   scroll-behavior: smooth;
   word-wrap: break-word;
@@ -85,8 +102,8 @@ small {
 }
 
 a {
-  color: var(--black-mid);
-  text-decoration-color: var(--grey-light);
+  color: var(--text-secondary);
+  text-decoration-color: var(--border-color);
   font-weight: 500;
   text-decoration: underline;
 }
@@ -97,48 +114,50 @@ a:hover {
 }
 
 hr {
-  border: 0.5px solid var(--grey-light);
+  border: 0.5px solid var(--border-color);
   margin: 32px 0 32px 0;
 }
 
 ul,
 ol,
 li {
-  text-decoration-color: var(--white-mid);
+  text-decoration-color: var(--border-color);
 }
 
 table,
 th,
 td {
-  border: 1px solid var(--white-dark);
+  border: 1px solid var(--border-color);
   border-collapse: collapse;
   padding: 0 5px 0 5px;
   text-align: left;
 }
 
 blockquote {
-  border-left: var(--white-mid) solid 4px;
+  border-left: var(--border-color) solid 4px;
   padding: 0px 20px;
   margin: 20px 0 20px 0;
   font-weight: 500;
 }
 
+code, pre, kbd {
+  font-family: var(--font-mono);
+}
+
 code {
   font-size: 0.9rem;
-  font-family: "Jetbrains Mono", monospace;
+  color: var(--text-primary);
 }
 
 pre {
-  background: var(--white);
-  border: solid 1px var(--white-dark);
+  background: var(--code-bg);
+  border: solid 1px var(--border-color);
   padding: 20px;
   border-radius: 5px;
   overflow: auto;
-  font-family: "Jetbrains Mono", monospace;
 }
 
 kbd {
-  font-family: "Jetbrains Mono", monospace;
   font-size: 0.8rem;
 }
 
@@ -159,7 +178,7 @@ img {
   max-height: 500px;
   margin: 20px 0 20px 0;
   display: block;
-  box-shadow: -8px 8px 20px var(--white-dark);
+  box-shadow: -8px 8px 20px var(--shadow-color);
 }
 
 video {
@@ -171,7 +190,7 @@ video {
 }
 
 fieldset {
-  border: 1px solid var(--white-dark);
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   margin: 0;
   padding: 10px 20px;
@@ -203,8 +222,8 @@ textarea {
   padding: 8px;
   border-radius: 6px;
   outline: none;
-  border: 1px solid var(--white-mid);
-  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
 }
 
 input[type="checkbox"],
@@ -284,7 +303,7 @@ input[type="submit"] {
   outline: none;
   border-radius: 55px;
   background: var(--accent);
-  color: var(--white);
+  color: var(--text-primary);
   font-family: inherit;
   font-size: inherit;
   margin-right: 0.5rem;
@@ -312,5 +331,23 @@ button:disabled,
 input[type="button"]:disabled,
 input[type="reset"]:disabled,
 input[type="submit"]:disabled {
-  border-color: var(--grey-mid);
+  border-color: var(--border-color);
+}
+
+.featured-links {
+  background-color: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+}
+
+.featured-links a {
+  color: var(--text-primary);
+  text-decoration-color: var(--border-color);
+  font-weight: 500;
+}
+
+.featured-links a:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
 }

@@ -1,17 +1,26 @@
-<nav>
-  <p>
-    <a id="homeTab" href="/">Home</a>
-    <a id="allTab" href="/all">All Posts</a>
-  </p>
-</nav>
+---
+import ThemeToggle from "./ThemeToggle.astro";
+---
+<header>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/all">All Posts</a>
+  </nav>
+</header>
+
 <style>
-  nav > p > a {
-    text-align: left;
-    margin-left: 20px;
+  header {
+    margin-bottom: 2rem;
   }
 
   nav {
-    margin-bottom: 4rem;
-    text-align: right;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  span {
+    color: var(--text-secondary);
   }
 </style>
