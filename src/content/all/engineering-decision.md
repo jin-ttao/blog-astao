@@ -2,7 +2,7 @@
 title: "SDK에 시멘틱 버전 관리를 택한 이유"
 pubDate: Feb 4 2025
 description: "Welcome-toast 프로젝트 시리즈"
-tags: ["SDK", "프론트엔드", "기술아키텍처", "버전관리"]
+tags: ["welcome-toast"]
 ---
 
 # Welcome-toast SDK가 시멘틱 버전 관리를 택한 이유

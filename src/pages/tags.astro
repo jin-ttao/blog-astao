@@ -1,14 +1,183 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
+
+const posts = await getCollection("all");
+const tags = [...new Set(posts.flatMap(post => post.data.tags || []))].sort();
+const tagCounts = tags.reduce((acc, tag) => {
+  acc[tag] = posts.filter(post => post.data.tags?.includes(tag)).length;
+  return acc;
+}, {} as Record<string, number>);
+
+// 게시물 정렬
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <Layout title="Tags - Jintae">
-  <h1>tags</h1>
-  <p>
-    Check out <a href="https://nownownow.com/" target="_blank">nownownow</a> to learn
-    about the origin of the “/now/” page.
-  </p>
-
-  <p>...</p>
+  <main>
+    <h1>Tags</h1>
+    <div class="tags-filter">
+      <button class="tag-badge active" data-tag="all">
+        전체 <span class="tag-count">{posts.length}</span>
+      </button>
+      {tags.map(tag => (
+        <button class="tag-badge" data-tag={tag}>
+          #{tag} <span class="tag-count">{tagCounts[tag]}</span>
+        </button>
+      ))}
+    </div>
+    <div class="posts-list">
+      {sortedPosts.map(post => (
+        <a href={`/all/${post.slug}/`} class="post-item" data-tags={post.data.tags?.join(',')}>
+          <h2 class="post-title">{post.data.title}</h2>
+          <div class="post-tags">
+            {post.data.tags?.map(tag => (
+              <span class="tag">#{tag}</span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
 </Layout>
+
+<script>
+  function initializeTagFilter() {
+    const tagButtons = document.querySelectorAll('.tag-badge');
+    const posts = document.querySelectorAll('.post-item');
+    
+    tagButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        tagButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        const selectedTag = button.getAttribute('data-tag');
+        
+        posts.forEach(post => {
+          if (selectedTag === 'all') {
+            post.style.display = 'block';
+          } else {
+            const postTags = post.getAttribute('data-tags')?.split(',') || [];
+            post.style.display = postTags.includes(selectedTag) ? 'block' : 'none';
+          }
+        });
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initializeTagFilter);
+</script>
+
+<style>
+  main {
+    max-width: 85ch;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  .tags-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 2rem 0;
+  }
+
+  .tag-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .tag-count {
+    font-size: 0.75rem;
+    opacity: 0.8;
+  }
+
+  .tag-badge:hover {
+    opacity: 0.8;
+  }
+
+  .tag-badge.active {
+    background-color: var(--text-secondary);
+    color: var(--bg-primary);
+    border-color: var(--text-secondary);
+  }
+
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.75rem 0;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-color);
+    gap: 2rem;
+  }
+
+  .post-item:first-child {
+    border-top: 1px solid var(--border-color);
+  }
+
+  .post-title {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 400;
+    flex-shrink: 0;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    opacity: 0.5;
+  }
+
+  .tag {
+    white-space: nowrap;
+  }
+
+  .post-item:hover {
+    text-decoration: none;
+  }
+
+  .post-item:hover .post-title {
+    color: var(--accent);
+  }
+
+  .post-item:hover .post-tags {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .tag-badge {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    .post-item {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .post-tags {
+      justify-content: flex-start;
+    }
+  }
+</style>
