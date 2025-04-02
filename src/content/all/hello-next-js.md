@@ -3,7 +3,6 @@ title: "블로그 고민하다가 Next.js 만나면서"
 pubDate: Oct 29 2024
 description: "결국 Astro 프레임워크를 택했다 :)"
 tags: ["Next.js", "Astro"]
-heroImage: "https://themefisher.com/blog-thumb/astro-vs-nextjs.webp"
 ---
 
 # 블로그 고민하다가 Next.js를 만나면서
