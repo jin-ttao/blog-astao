@@ -2,6 +2,7 @@
 title: "함수도 값인데 useCallback 대신 useMemo로?"
 pubDate: Oct 6 2024
 description: "useMemo은 useCallback을 대체할 수 있는가 #react #hook"
+heroImage: "https://i.imgur.com/XZS4lXj.png"
 tags: ["React"]
 ---
 

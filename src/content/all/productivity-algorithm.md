@@ -2,6 +2,7 @@
 title: "더 많은 일을 해내는 방법"
 pubDate: Nov 28 2024
 description: "데일리 알고리즘 챌린지 시작하면서 (하루 만에 7명이 모였다)"
+heroImage: "https://i.imgur.com/h6LUXe8.png"
 tags: ["생산성", "알고리즘", "스터디", "루틴"]
 ---
 

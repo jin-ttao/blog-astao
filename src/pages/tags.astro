@@ -13,7 +13,10 @@ const tagCounts = tags.reduce((acc, tag) => {
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<Layout title="Tags - Jintae">
+<Layout
+  title="Tags"
+  description="as-tao 블로그의 글을 태그별로 모아보는 페이지"
+>
   <main>
     <h1>Tags</h1>
     <div class="tags-filter">

@@ -2,6 +2,7 @@
 title: "React 컴포넌트 return 안에서 일어나는 일"
 pubDate: Sep 29 2024
 description: "JSX 내부에서 JavaScript 표현식만 사용 가능한 이유"
+heroImage: "/assets/img/jsx-react.png"
 tags: ["React"]
 ---
 

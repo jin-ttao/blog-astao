@@ -2,6 +2,7 @@
 title: "입맛대로 칸반 사용하기"
 pubDate: Dec 15 2024
 description: "2024w50 회고 / 바닐라코딩 프론트엔드 개인 프로젝트 3주차"
+heroImage: "/assets/img/w50-review-coding-in-stair.png"
 tags: ["바닐라코딩"]
 ---
 

@@ -15,6 +15,10 @@ const post = Astro.props;
 const { Content } = await post.render();
 ---
 
-<Layout {...post.data}>
-  <Content />
+<Layout {...post.data} type="article">
+  <main>
+    <article>
+      <Content />
+    </article>
+  </main>
 </Layout>

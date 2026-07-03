@@ -2,6 +2,7 @@
 title: "첫 팀 프로젝트, 첫 코드 리뷰, 새로운 고민"
 pubDate: Nov 16 2024
 description: "팀에 맞는 코드 리뷰 최적화를 시도해보자"
+heroImage: "https://i.imgur.com/bWdBnRU.jpeg"
 tags: ["팀프로젝트", "코드리뷰"]
 ---
 

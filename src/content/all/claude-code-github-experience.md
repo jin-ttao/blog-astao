@@ -15,8 +15,6 @@ GitHub에서 직접 코드 수정하는 AI... 원리가 뭐지?
 
 며칠 전, GitHub Issue에서 `@claude` 멘션을 달았더니 정말로 AI가 답변을 달았다. 그런데 답변만 단 게 아니라 **실제로 내 레포지토리의 코드를 수정하고 커밋까지 생성**했다. 처음에는 눈을 의심했다. "어? 내가 커밋 안 했는데 누가 코드를 바꿨지?"
 
-<img src="/assets/img/claude-github-action.png" width="700" alt="claude-github-action">
-
 이게 대체 어떻게 가능한 거지? GitHub에서 소스코드를 그냥 수정한 건가? 궁금증이 폭발해서 Claude Code의 `/install-github-app` 명령어의 원리부터 파헤쳐봤다.
 
 ### 마법이 아닌 GitHub Actions의 정교한 활용

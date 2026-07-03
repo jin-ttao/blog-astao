@@ -2,6 +2,7 @@
 title: "SDK에 시멘틱 버전 관리를 택한 이유"
 pubDate: Feb 4 2025
 description: "Welcome-toast 프로젝트 시리즈"
+heroImage: "/assets/img/jsdelivr-github.png"
 tags: ["welcome-toast"]
 ---
 
